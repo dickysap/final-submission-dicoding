@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               Material(
                 child: ListTile(
-                  title: const Text('Scheduling News'),
+                  title: const Text('Aktifkan Notifikasi Promo'),
                   trailing: Consumer<SchedulingProvider>(
                     builder: (context, scheduled, _) {
                       return Switch.adaptive(
@@ -35,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         onChanged: (value) async {
                           setState(() {
                             scheduled.schedulePromo(value);
-                            provider.enableDailyNews(value);
+                            provider.enableDailyPromo(value);
                           });
                         },
                       );

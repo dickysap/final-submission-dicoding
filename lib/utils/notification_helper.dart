@@ -60,12 +60,13 @@ class NotificationHelper {
         iOS: iOSPlatformChannelSpecifics);
 
     var titleNotification = "<b>Promo For You !!! </b>";
-    var titleNews = restaurant.restaurants[0].name;
+    var randomRestaurant = Random().nextInt(restaurant.restaurants.length);
+    var titlePromo = restaurant.restaurants[randomRestaurant].name;
 
     //get random index
 
     await flutterLocalNotificationsPlugin.show(
-        0, titleNotification, titleNews, platformChannelSpecifics,
+        0, titleNotification, titlePromo, platformChannelSpecifics,
         payload: json.encode(restaurant.toJson()));
   }
 

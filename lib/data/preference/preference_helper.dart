@@ -1,8 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesHelper {
-  static const darkTheme = 'DARK_THEME';
-  static const dailyNews = 'DAILY_NEWS';
+  static const dailyPromo = 'DAILY_Promo';
 
   final Future<SharedPreferences> sharedPreferences;
 
@@ -10,11 +9,11 @@ class PreferencesHelper {
 
   Future<bool> get isPromoActive async {
     final prefs = await sharedPreferences;
-    return prefs.getBool(dailyNews) ?? false;
+    return prefs.getBool(dailyPromo) ?? false;
   }
 
   void setPromo(bool value) async {
     final prefs = await sharedPreferences;
-    prefs.setBool(dailyNews, value);
+    prefs.setBool(dailyPromo, value);
   }
 }

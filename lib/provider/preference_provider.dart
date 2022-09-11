@@ -16,7 +16,7 @@ class PreferenceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void enableDailyNews(bool value) {
+  void enableDailyPromo(bool value) {
     preferencesHelper.setPromo(value);
     _getDetailPromo();
   }
