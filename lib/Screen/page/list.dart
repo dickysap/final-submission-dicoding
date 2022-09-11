@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:makan_makan/Screen/page/bookmarks_page.dart';
+import 'package:makan_makan/Screen/page/profile_page.dart';
 import 'package:makan_makan/Screen/page/search.dart';
+import 'package:makan_makan/Screen/page/widget/card_restaurant.dart';
 import 'package:makan_makan/Screen/page/widget/product_list.dart';
 import 'package:provider/provider.dart';
 import 'package:makan_makan/provider/restaurant_result.dart';
@@ -28,14 +31,36 @@ class ListPage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Warung Tiwi",
-                            style: TextStyle(fontSize: 25),
+                          Expanded(
+                            child: const Text(
+                              "Warung Tiwi",
+                              style: TextStyle(fontSize: 25),
+                            ),
                           ),
+                          Expanded(
+                            child: TextFormField(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, SearchPage.routeName);
+                              },
+                              decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  suffix: const Icon(Icons.search),
+                                  hintText: 'Cari Restaurant atau Menu'),
+                            ),
+                          ),
+                          SizedBox(width: 8),
                           InkWell(
                             onTap: () {
                               Navigator.pushNamed(
-                                  context, SearchPage.routeName);
+                                  context, ProfilePage.routeName);
                             },
                             child: Container(
                                 height: 50,
@@ -44,7 +69,7 @@ class ListPage extends StatelessWidget {
                                     color: Colors.orange,
                                     borderRadius: BorderRadius.circular(20)),
                                 child: const Icon(
-                                  Icons.search,
+                                  Icons.person,
                                   color: Colors.white,
                                 )),
                           ),
@@ -91,9 +116,7 @@ class ListPage extends StatelessWidget {
                       itemCount: state.result.restaurants.length,
                       itemBuilder: (context, index) {
                         var restaurant = state.result.restaurants[index];
-                        return ProductList(
-                          restaurant: restaurant,
-                        );
+                        return CardRestaurant(restaurant: restaurant);
                       }),
                 ],
               ),
@@ -107,12 +130,6 @@ class ListPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Lottie.asset('assets/lottie/no_internet.json'),
-                const SizedBox(height: 20),
-                const Icon(
-                  Icons.signal_wifi_off,
-                  size: 100,
-                  color: Colors.blue,
-                )
               ],
             ),
           );
@@ -121,7 +138,9 @@ class ListPage extends StatelessWidget {
         }
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, BookmarksPage.roteName);
+        },
         child: Icon(
           Icons.shopping_cart,
           color: Colors.white,

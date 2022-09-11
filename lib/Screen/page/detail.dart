@@ -37,9 +37,12 @@ class _DetailPageState extends State<DetailPage> {
                   backgroundColor: Colors.orange,
                   flexibleSpace: FlexibleSpaceBar(
                     titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
-                    background: Image.network(
-                      restaurant.getImage(),
-                      fit: BoxFit.cover,
+                    background: Hero(
+                      tag: restaurant.getImage(),
+                      child: Image.network(
+                        restaurant.getImage(),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
