@@ -23,7 +23,7 @@ class DatabaseProvider extends ChangeNotifier {
   void _getShoppingCart() async {
     _shoppingCart = await databaseHelper.getShoppingCart();
 
-    if (_shoppingCart.length > 0) {
+    if (_shoppingCart.isNotEmpty) {
       _state = ResultStateDatabase.hasData;
     } else {
       _state = ResultStateDatabase.noData;

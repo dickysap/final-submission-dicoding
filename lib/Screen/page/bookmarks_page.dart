@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:makan_makan/Screen/page/widget/card_restaurant.dart';
 import 'package:makan_makan/provider/database_provider.dart';

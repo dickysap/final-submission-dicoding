@@ -4,7 +4,6 @@ import 'package:makan_makan/Screen/page/bookmarks_page.dart';
 import 'package:makan_makan/Screen/page/profile_page.dart';
 import 'package:makan_makan/Screen/page/search.dart';
 import 'package:makan_makan/Screen/page/widget/card_restaurant.dart';
-import 'package:makan_makan/Screen/page/widget/product_list.dart';
 import 'package:provider/provider.dart';
 import 'package:makan_makan/provider/restaurant_result.dart';
 
@@ -31,8 +30,8 @@ class ListPage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: const Text(
+                          const Expanded(
+                            child: Text(
                               "Warung Tiwi",
                               style: TextStyle(fontSize: 25),
                             ),
@@ -45,7 +44,7 @@ class ListPage extends StatelessWidget {
                               },
                               decoration: InputDecoration(
                                   contentPadding:
-                                      EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                      const EdgeInsets.fromLTRB(10, 10, 10, 0),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -56,7 +55,7 @@ class ListPage extends StatelessWidget {
                                   hintText: 'Cari Restaurant atau Menu'),
                             ),
                           ),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           InkWell(
                             onTap: () {
                               Navigator.pushNamed(
@@ -137,14 +136,19 @@ class ListPage extends StatelessWidget {
           return const Center(child: Text(''));
         }
       }),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.pushNamed(context, BookmarksPage.roteName);
         },
-        child: Icon(
-          Icons.shopping_cart,
+        label: const Text(
+          'Favorite Restaurant',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        icon: const Icon(
+          Icons.favorite,
           color: Colors.white,
         ),
+        backgroundColor: Colors.pink,
       ),
     );
   }

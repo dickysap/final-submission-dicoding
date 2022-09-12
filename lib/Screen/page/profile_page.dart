@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:makan_makan/provider/preference_provider.dart';
 import 'package:makan_makan/provider/scheduling_provider.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +16,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: const Text("Settings"),
       ),
       body: Consumer<PreferenceProvider>(
         builder: (context, provider, child) {

@@ -22,14 +22,14 @@ class CardRestaurant extends StatelessWidget {
                 trailing: isBookemarked
                     ? IconButton(
                         onPressed: () => provider.removeCart(restaurant.id),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.favorite,
                           color: Colors.red,
                         ),
                       )
                     : IconButton(
                         onPressed: () => provider.addShoppingCart(restaurant),
-                        icon: Icon(Icons.favorite_border),
+                        icon: const Icon(Icons.favorite_border),
                         color: Colors.red),
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),

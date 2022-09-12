@@ -81,7 +81,7 @@ class _SearchPageState extends State<SearchPage> {
               itemCount: value.result.restaurants.length,
               itemBuilder: (context, index) {
                 var restaurant = value.result.restaurants[index];
-                return SearchResult(restaurants: restaurant);
+                return SearchResult(restaurant: restaurant);
               }),
         );
       } else if (value.state == SearchState.noData) {
