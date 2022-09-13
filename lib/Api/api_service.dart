@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:http/http.dart' as http;
+import 'package:makan_makan/Api/models/element.dart';
 import 'package:makan_makan/Api/models/restaurant_detail.dart';
 import 'package:makan_makan/Api/models/restaurant_list.dart';
 import 'package:makan_makan/Api/models/search.dart';
@@ -34,6 +36,20 @@ class ApiService {
       return SearchRestaurant.fromJson(json.decode(response.body));
     } else {
       throw Exception("Failed to Load Data");
+    }
+  }
+
+  Future<Restaurant> getRandomRestaurant() async {
+    final response = await http.get(Uri.parse(_baseURL + "list"));
+    if (response.statusCode == 200) {
+      final random = new Random();
+      List<Restaurant> listRestaurant =
+          RestaurantList.fromJson(json.decode(response.body)).restaurants;
+      Restaurant restaurant =
+          listRestaurant[random.nextInt(listRestaurant.length)];
+      return restaurant;
+    } else {
+      throw Exception('Failed Load List Restaurant');
     }
   }
 }

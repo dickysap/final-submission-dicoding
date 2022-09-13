@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:makan_makan/Screen/page/widget/card_restaurant.dart';
 import 'package:makan_makan/provider/database_provider.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class BookmarksPage extends StatelessWidget {
         } else {
           return Center(
             child: Material(
-              child: Text(provider.message),
+              child: Lottie.asset('assets/lottie/error.json'),
             ),
           );
         }

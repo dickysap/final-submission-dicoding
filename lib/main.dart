@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:makan_makan/Api/api_service.dart';
@@ -27,6 +30,9 @@ void main() async {
   final NotificationHelper _notificationHelper = NotificationHelper();
   final BackgroundService _service = BackgroundService();
   _service.initializeIsolate();
+  if (Platform.isAndroid) {
+    await AndroidAlarmManager.initialize();
+  }
   await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
   runApp(const MyApp());
 }
@@ -49,7 +55,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (_) => PreferenceProvider(
                 preferencesHelper: PreferencesHelper(
-                    sharedPreferences: SharedPreferences.getInstance())))
+                    sharedPreferences: SharedPreferences.getInstance()))),
+        ChangeNotifierProvider(
+          create: (_) => DatabaseProvider(databaseHelper: DatabaseHelper()),
+        )
       ],
       child: Consumer<PreferenceProvider>(
         builder: (context, value, child) {
@@ -63,7 +72,7 @@ class MyApp extends StatelessWidget {
             initialRoute: SplashScreen.routeName,
             routes: {
               SplashScreen.routeName: (context) => const SplashScreen(),
-              HomePage.routeName: (context) => HomePage(),
+              HomePage.routeName: (context) => const HomePage(),
               DetailPage.routeName: (context) => DetailPage(
                   id: ModalRoute.of(context)?.settings.arguments as String),
               SearchPage.routeName: (context) => const SearchPage(),

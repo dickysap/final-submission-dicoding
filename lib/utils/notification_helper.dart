@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:makan_makan/Api/models/element.dart';
 import 'package:makan_makan/Api/models/restaurant_list.dart';
 import 'package:makan_makan/common/navigation.dart';
 import 'package:rxdart/subjects.dart';
@@ -41,10 +42,10 @@ class NotificationHelper {
 
   Future<void> showNotification(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
-      RestaurantList restaurant) async {
+      Restaurant restaurant) async {
     var channelId = "1";
     var channelName = "channel_01";
-    var channelDescription = "dicoding news channel";
+    var channelDescription = "Restaurant Notifacation";
 
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         channelId, channelName,
@@ -59,11 +60,8 @@ class NotificationHelper {
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
 
-    var titleNotification = "<b>Promo For You !!! </b>";
-    var randomRestaurant = Random().nextInt(restaurant.restaurants.length);
-    var titlePromo = restaurant.restaurants[randomRestaurant].name;
-
-    //get random index
+    var titleNotification = "<b>${restaurant.name}</b>";
+    var titlePromo = "Sedang Mengadakan promo 9.9";
 
     await flutterLocalNotificationsPlugin.show(
         0, titleNotification, titlePromo, platformChannelSpecifics,
