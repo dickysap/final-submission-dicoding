@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:makan_makan/Api/models/element.dart';
 import 'package:makan_makan/Api/models/restaurant_list.dart';
@@ -29,51 +30,61 @@ class NotificationHelper {
     );
 
     var initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String? payload) async {
       if (payload != null) {
-        print('notification payload: $payload');
+        if (kDebugMode) {
+          print('notification payload: $payload');
+        }
       }
-      selectNotificationSubject.add(payload ?? 'empty payload');
+      selectNotificationSubject.add(payload ?? 'Empty payload');
     });
   }
 
   Future<void> showNotification(
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
-      Restaurant restaurant) async {
-    var channelId = "1";
-    var channelName = "channel_01";
-    var channelDescription = "Restaurant Notifacation";
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
+    Restaurant restaurant,
+  ) async {
+    var _channelId = "1";
+    var _channelName = 'channel_01';
+    var _channelDescription = 'notification promo restaurant';
 
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        channelId, channelName,
-        channelDescription: channelDescription,
-        importance: Importance.max,
-        priority: Priority.high,
-        ticker: 'ticker',
-        styleInformation: const DefaultStyleInformation(true, true));
+      _channelId,
+      _channelName,
+      channelDescription: _channelDescription,
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+      styleInformation: const DefaultStyleInformation(true, true),
+    );
 
     var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-        iOS: iOSPlatformChannelSpecifics);
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
 
-    var titleNotification = "<b>${restaurant.name}</b>";
-    var titlePromo = "Sedang Mengadakan promo 9.9";
+    var titleNotification = '<b>${restaurant.name}</b>';
+    var titleRestaurant = 'Sedang ada Promo 9.9';
 
     await flutterLocalNotificationsPlugin.show(
-        0, titleNotification, titlePromo, platformChannelSpecifics,
-        payload: json.encode(restaurant.toJson()));
+      0,
+      titleNotification,
+      titleRestaurant,
+      platformChannelSpecifics,
+      payload: json.encode(restaurant.toJson()),
+    );
   }
 
   void configureSelectNotificationSubject(String route) {
-    selectNotificationSubject.stream.listen(
-      (String payload) async {
-        var data = RestaurantList.fromJson(json.decode(payload));
-        Navigation.intentWithData(route, data);
-      },
-    );
+    selectNotificationSubject.stream.listen((String payload) async {
+      var data = Restaurant.fromJson(json.decode(payload));
+      Navigation.intentWithData(route, data);
+    });
   }
 }

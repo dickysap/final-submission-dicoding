@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: const Text("Settings"),
       ),
-      body: Consumer<PreferenceProvider>(
+      body: Consumer<PreferencesProvider>(
         builder: (context, provider, child) {
           return ListView(
             children: [
@@ -32,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         onChanged: (value) async {
                           setState(() {
                             scheduled.schedulePromo(value);
-                            provider.enableDailyPromo(value);
+                            provider.enableDailyReminder(value);
                           });
                         },
                       );

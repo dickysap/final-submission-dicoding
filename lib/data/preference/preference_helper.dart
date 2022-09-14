@@ -1,19 +1,30 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesHelper {
-  static const dailyPromo = 'DAILY_Promo';
-
   final Future<SharedPreferences> sharedPreferences;
 
   PreferencesHelper({required this.sharedPreferences});
 
-  Future<bool> get isPromoActive async {
+  static const darkTheme = 'DARK_THEME';
+  static const dailyReminder = 'DAILY_REMINDER';
+
+  Future<bool> get isDarkTheme async {
     final prefs = await sharedPreferences;
-    return prefs.getBool(dailyPromo) ?? false;
+    return prefs.getBool(darkTheme) ?? false;
   }
 
-  void setPromo(bool value) async {
+  void setDarkTheme(bool value) async {
     final prefs = await sharedPreferences;
-    prefs.setBool(dailyPromo, value);
+    prefs.setBool(darkTheme, value);
+  }
+
+  Future<bool> get isDailyReminderActive async {
+    final prefs = await sharedPreferences;
+    return prefs.getBool(dailyReminder) ?? false;
+  }
+
+  void setDailyReminder(bool value) async {
+    final prefs = await sharedPreferences;
+    prefs.setBool(dailyReminder, value);
   }
 }

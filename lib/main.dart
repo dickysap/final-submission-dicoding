@@ -4,6 +4,7 @@ import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:makan_makan/Api/api_service.dart';
+import 'package:makan_makan/Api/models/element.dart';
 import 'package:makan_makan/Screen/page/bookmarks_page.dart';
 import 'package:makan_makan/Screen/page/detail.dart';
 import 'package:makan_makan/Screen/page/home.dart';
@@ -53,14 +54,14 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (_) => SchedulingProvider()),
         ChangeNotifierProvider(
-            create: (_) => PreferenceProvider(
+            create: (_) => PreferencesProvider(
                 preferencesHelper: PreferencesHelper(
                     sharedPreferences: SharedPreferences.getInstance()))),
         ChangeNotifierProvider(
           create: (_) => DatabaseProvider(databaseHelper: DatabaseHelper()),
         )
       ],
-      child: Consumer<PreferenceProvider>(
+      child: Consumer<PreferencesProvider>(
         builder: (context, value, child) {
           return MaterialApp(
             navigatorKey: navigatorKey,
@@ -74,7 +75,8 @@ class MyApp extends StatelessWidget {
               SplashScreen.routeName: (context) => const SplashScreen(),
               HomePage.routeName: (context) => const HomePage(),
               DetailPage.routeName: (context) => DetailPage(
-                  id: ModalRoute.of(context)?.settings.arguments as String),
+                  restaurant:
+                      ModalRoute.of(context)?.settings.arguments as Restaurant),
               SearchPage.routeName: (context) => const SearchPage(),
               ReviewPage.routeName: (context) => ReviewPage(
                   id: ModalRoute.of(context)?.settings.arguments as String),

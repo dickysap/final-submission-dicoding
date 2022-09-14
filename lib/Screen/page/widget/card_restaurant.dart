@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:makan_makan/Api/models/element.dart';
 import 'package:makan_makan/Screen/page/detail.dart';
+import 'package:makan_makan/common/navigation.dart';
 import 'package:makan_makan/provider/database_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -45,8 +46,7 @@ class CardRestaurant extends StatelessWidget {
                 ),
                 subtitle: Text(restaurant.city),
                 onTap: () {
-                  Navigator.pushNamed(context, DetailPage.routeName,
-                      arguments: restaurant.id);
+                  Navigation.intentWithData(DetailPage.routeName, restaurant);
                 },
               ),
             );

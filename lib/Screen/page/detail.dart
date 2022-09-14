@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makan_makan/Api/api_service.dart';
+import 'package:makan_makan/Api/models/element.dart';
 import 'package:makan_makan/Api/models/menus.dart';
 import 'package:makan_makan/Screen/page/review.dart';
 import 'package:makan_makan/Screen/page/widget/menus.dart';
@@ -7,12 +8,9 @@ import 'package:makan_makan/provider/detail_restaurant.dart';
 import 'package:provider/provider.dart';
 
 class DetailPage extends StatefulWidget {
-  final String id;
+  Restaurant restaurant;
   static const routeName = '/detail_page';
-  const DetailPage({
-    Key? key,
-    required this.id,
-  }) : super(key: key);
+  DetailPage({Key? key, required this.restaurant}) : super(key: key);
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -22,7 +20,8 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<DetailProvider>(
-      create: (_) => DetailProvider(apiService: ApiService(), id: widget.id),
+      create: (_) =>
+          DetailProvider(apiService: ApiService(), id: widget.restaurant.id),
       child: Scaffold(body: Consumer<DetailProvider>(
         builder: (context, value, _) {
           if (value.state == DetailResultState.loading) {
@@ -70,10 +69,7 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         const SizedBox(height: 10),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, ReviewPage.routeName,
-                                arguments: widget.id);
-                          },
+                          onTap: () {},
                           child: Row(
                             children: [
                               const Icon(

@@ -125,11 +125,13 @@ class ListPage extends StatelessWidget {
           return Center(child: Lottie.asset('assets/lottie/error.json'));
         } else if (state.state == ResultState.error) {
           return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Lottie.asset('assets/lottie/no_internet.json'),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset('assets/lottie/no_internet.json'),
+                ],
+              ),
             ),
           );
         } else {

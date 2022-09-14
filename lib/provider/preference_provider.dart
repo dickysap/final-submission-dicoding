@@ -1,23 +1,27 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:makan_makan/data/preference/preference_helper.dart';
+import 'package:provider/provider.dart';
 
-class PreferenceProvider extends ChangeNotifier {
+class PreferencesProvider extends ChangeNotifier {
   PreferencesHelper preferencesHelper;
 
-  PreferenceProvider({required this.preferencesHelper}) {
-    _getDetailPromo();
+  PreferencesProvider({required this.preferencesHelper}) {
+    _getDailyReminderPreferences();
   }
-  bool _isPromos = false;
-  bool get isPromos => _isPromos;
 
-  void _getDetailPromo() async {
-    _isPromos = await preferencesHelper.isPromoActive;
+  bool _isDarkTheme = false;
+  bool get isDarkTheme => _isDarkTheme;
+
+  bool _isDailyReminderActive = false;
+  bool get isDailyReminderActive => _isDailyReminderActive;
+
+  void _getDailyReminderPreferences() async {
+    _isDailyReminderActive = await preferencesHelper.isDailyReminderActive;
     notifyListeners();
   }
 
-  void enableDailyPromo(bool value) {
-    preferencesHelper.setPromo(value);
-    _getDetailPromo();
+  void enableDailyReminder(bool value) {
+    preferencesHelper.setDailyReminder(value);
+    _getDailyReminderPreferences();
   }
 }

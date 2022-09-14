@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'dart:isolate';
 
+import 'package:flutter/foundation.dart';
 import 'package:makan_makan/Api/api_service.dart';
 import 'package:makan_makan/main.dart';
 import 'package:makan_makan/utils/notification_helper.dart';
@@ -27,15 +28,17 @@ class BackgroundService {
   }
 
   static Future<void> callback() async {
-    print('Alarm fired!');
-    final NotificationHelper notificationHelper = NotificationHelper();
+    if (kDebugMode) {
+      print('Alarm fired!');
+    }
+    final NotificationHelper _notificationHelper = NotificationHelper();
     var result = await ApiService().restaurantResult();
 
     final _random = Random();
     var restaurant =
         result.restaurants[_random.nextInt(result.restaurants.length)];
 
-    await notificationHelper.showNotification(
+    await _notificationHelper.showNotification(
         flutterLocalNotificationsPlugin, restaurant);
 
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
