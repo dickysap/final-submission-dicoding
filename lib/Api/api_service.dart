@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:http/http.dart' as http;
-import 'package:makan_makan/Api/models/element.dart';
 import 'package:makan_makan/Api/models/restaurant_detail.dart';
 import 'package:makan_makan/Api/models/restaurant_list.dart';
 import 'package:makan_makan/Api/models/search.dart';

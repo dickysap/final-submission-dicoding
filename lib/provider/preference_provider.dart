@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:makan_makan/data/preference/preference_helper.dart';
-import 'package:provider/provider.dart';
 
 class PreferencesProvider extends ChangeNotifier {
   PreferencesHelper preferencesHelper;
@@ -8,9 +7,6 @@ class PreferencesProvider extends ChangeNotifier {
   PreferencesProvider({required this.preferencesHelper}) {
     _getDailyReminderPreferences();
   }
-
-  bool _isDarkTheme = false;
-  bool get isDarkTheme => _isDarkTheme;
 
   bool _isDailyReminderActive = false;
   bool get isDailyReminderActive => _isDailyReminderActive;

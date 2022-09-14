@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   trailing: Consumer<SchedulingProvider>(
                     builder: (context, scheduled, _) {
                       return Switch.adaptive(
-                        value: scheduled.isScheduled,
+                        value: provider.isDailyReminderActive,
                         onChanged: (value) async {
                           setState(() {
                             scheduled.schedulePromo(value);

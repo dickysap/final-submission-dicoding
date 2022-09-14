@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:makan_makan/Api/api_service.dart';
 import 'package:makan_makan/Api/models/element.dart';
 import 'package:makan_makan/Api/models/menus.dart';
-import 'package:makan_makan/Screen/page/review.dart';
 import 'package:makan_makan/Screen/page/widget/menus.dart';
 import 'package:makan_makan/provider/detail_restaurant.dart';
 import 'package:provider/provider.dart';

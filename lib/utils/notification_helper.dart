@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:makan_makan/Api/models/element.dart';
-import 'package:makan_makan/Api/models/restaurant_list.dart';
 import 'package:makan_makan/common/navigation.dart';
 import 'package:rxdart/subjects.dart';
 
