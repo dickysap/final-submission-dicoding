@@ -47,9 +47,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => DatabaseProvider(databaseHelper: DatabaseHelper()),
-        ),
-        ChangeNotifierProvider(
           create: (_) => ResultProvider(apiService: ApiService()),
         ),
         ChangeNotifierProvider(create: (_) => SchedulingProvider()),
